@@ -21,14 +21,29 @@ const displayCategory = (categories) => {
 };
 
 // thambale section
-
 function thambale() {
+    
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
     .then((res) => res.json())
     .then((data) => displayVideo(data.videos))
+    .catch((err) => console.error("Error fetching videos:", err)); 
+
 }
+
 const displayVideo = (videos) => {
     let videoContainer = document.getElementById('vcontainer');
+    let hid = document.getElementById('hid');
+
+    // Ensure 'hid' element exists before adding 'hidden' class
+    if (hid) {
+        hid.classList.add('hidden');
+    }
+
+    // Ensure videoContainer exists
+    if (videoContainer) {
+        videoContainer.innerHTML = ""; // Clear previous content before adding new cards
+    }
+
     videos.forEach(video => {
         let videoElement = document.createElement('div');
         videoElement.innerHTML = `
@@ -50,6 +65,4 @@ const displayVideo = (videos) => {
 };
 
 
-
 category();
-thambale();
